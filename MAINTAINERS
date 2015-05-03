@@ -7404,6 +7404,11 @@ F:	drivers/video/fbdev/sti*
 F:	drivers/video/console/sti*
 F:	drivers/video/logo/logo_parisc*
 
+PATMAN PATCH AUTOMATION TOOL
+M:	Simon Glass <sjg@chromium.org>
+S:	Maintained
+F:	tools/patman/
+
 PC87360 HARDWARE MONITORING DRIVER
 M:	Jim Cromie <jim.cromie@gmail.com>
 L:	lm-sensors@lm-sensors.org
