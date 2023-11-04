@@ -58,6 +58,9 @@ typedef void *efi_handle_t;
 #define __efiapi
 #endif
 
+#define __vbe_request(_name, _compat)	\
+	char const __section(".vbe.rodata") _efi_request_name[] = _compat;
+
 /*
  * The UEFI spec and EDK2 reference implementation both define EFI_GUID as
  * struct { u32 a; u16; b; u16 c; u8 d[8]; }; and so the implied alignment

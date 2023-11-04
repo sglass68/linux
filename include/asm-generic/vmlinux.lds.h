@@ -937,6 +937,12 @@
 #define INIT_RAM_FS
 #endif
 
+#define INIT_VBE_REQUESTS						\
+	__vbe_start = .;						\
+	KEEP(*(.init.vbe*))						\
+	__vbe_end = .;						\
+	. = ALIGN(8);							\
+
 /*
  * Memory encryption operates on a page basis. Since we need to clear
  * the memory encryption mask for this section, it needs to be aligned

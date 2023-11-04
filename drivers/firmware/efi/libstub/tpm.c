@@ -165,3 +165,5 @@ void efi_retrieve_tpm2_eventlog(void)
 err_free:
 	efi_bs_call(free_pool, log_tbl);
 }
+
+__vbe_request(tcg2_log, "vbe,tcg2-log")

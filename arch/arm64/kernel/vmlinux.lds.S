@@ -258,6 +258,7 @@ SECTIONS
 		INIT_CALLS
 		CON_INITCALL
 		INIT_RAM_FS
+		INIT_VBE_REQUESTS
 		*(.init.altinstructions .init.bss)	/* from the EFI stub */
 	}
 	.exit.data : {
