@@ -157,3 +157,5 @@ efi_status_t efi_kaslr_relocate_kernel(unsigned long *image_addr,
 
 	return status;
 }
+
+__vbe_os_request(kaslr, "vbe,kaslr-rand", "rand-seed-size=4")

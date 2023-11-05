@@ -58,8 +58,9 @@ typedef void *efi_handle_t;
 #define __efiapi
 #endif
 
-#define __vbe_request(_name, _compat)	\
-	char const __section(".vbe.rodata") _efi_request_name[] = _compat;
+#define __vbe_os_request(_name, _compat, _vals)	\
+	char const __section(".vbe.rodata") vbe_os_req ## _name [] = \
+		_compat "." _vals;
 
 /*
  * The UEFI spec and EDK2 reference implementation both define EFI_GUID as

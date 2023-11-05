@@ -113,6 +113,24 @@ def setup_fit(fsw, name):
     fsw.begin_node('images')
 
 
+def add_vbe_data(fsw, vbe_data):
+    """Add VBE OS requests to the kernel node
+
+    Args:
+        fsw (libfdt.FdtSw): Object to use for writing
+        vbe_data (bytes): VBE bytestring from kernel
+    """
+    for item in vbe_data[:-1].split(b'\0'):
+        entry = item.decode('utf-8')
+        compat, props = entry.split('.')
+        vbe, name = compat.split(',')
+        with fsw.add_node(name):
+            fsw.property_string('compatible', compat)
+            if props:
+                name, val = props.split('=')
+                fsw.property_u32(name, int(val))
+
+
 def write_kernel(fsw, data, args, vbe_data):
     """Write out the kernel image
 
@@ -126,7 +144,7 @@ def write_kernel(fsw, data, args, vbe_data):
             fit_os: Operating Systems, e.g. 'linux'
             name: Name of OS, e.g. 'Linux-6.6.0-rc7'
             compress: Compression algorithm to use, e.g. 'gzip'
-        vbe_data (bytes): VBE bytestring from kernel
+        vbe_data (bytes): VBE bytestring from kernel (empty if none)
     """
     with fsw.add_node('kernel'):
         fsw.property_string('description', args.name)
@@ -139,11 +157,7 @@ def write_kernel(fsw, data, args, vbe_data):
         fsw.property_u32('entry', 0)
 
         if vbe_data:
-            for item in vbe_data[:-1].split(b'\0'):
-                compat = item.decode('utf-8')
-                vbe, name = compat.split(',')
-                with fsw.add_node(name):
-                    fsw.property_string('compatible', compat)
+            add_vbe_data(fsw, vbe_data)
 
 
 def finish_fit(fsw, entries):

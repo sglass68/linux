@@ -506,7 +506,7 @@ MAKE_FIT := $(srctree)/scripts/make_fit.py
 quiet_cmd_fit = FIT     $@
       cmd_fit = $(MAKE_FIT) -f $@ --arch $(UIMAGE_ARCH) --os linux \
 			--name '$(UIMAGE_NAME)' \
-			--compress $(UIMAGE_COMPRESSION) -k $< \
+			--compress $(UIMAGE_COMPRESSION) -k $< -V vmlinux \
 			$(dir $<)/dts
 
 $(obj)/%.fit: $(obj)/%.itk $(MAKE_FIT) FORCE
