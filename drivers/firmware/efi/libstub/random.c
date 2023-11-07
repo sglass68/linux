@@ -177,3 +177,6 @@ err_warn:
 		efi_warn("Retaining bootloader-supplied seed only");
 	return status;
 }
+
+// Use BLAKE2S_HASH_SIZE
+__vbe_os_request(rand_seed, "vbe,random-seed", "seed-size=32")
